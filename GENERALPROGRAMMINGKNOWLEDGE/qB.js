@@ -38,8 +38,33 @@ function spaceSaver(sites) {
 /*
 The trie lowers space because we dont have two store for example google.com more
 than once if its part of other urls. We can storea url once and add the other
- paths as keys for. 
+ paths as keys for. This is what the data structure looks like for the above set.
+
+ // outcome = {
+// 	google: {
+// 		'com': {
+// 			map: {
+// 			  newyork:null,
+// 			  brooklyn:null,
+// 			},
+// 			gmail: null,
+// 		},
+// 	},
+// 	facebook:{
+// 	  'com':{
+// 	    ttp:null,
+// 	    zucc,null
+// 	  }
+// 	}
+// };
+ 
+
+
 */
+
+
+
+
 
 completedTrie = spaceSaver(urls);
 
