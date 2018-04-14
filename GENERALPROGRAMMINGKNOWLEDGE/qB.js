@@ -63,9 +63,9 @@ function visited(url) {
   }
   return true;
 }
-
-console.log(visited('google.com/map'));
-console.log(visited('google.com/gmail'));
-console.log(visited('google.com/jobs'));
-console.log(visited('facebook.com/map'));
-console.log(visited('facebook.com/tpp'));
+// Test Cases
+console.log(visited('google.com/map')); // true
+console.log(visited('google.com/gmail')); // true
+console.log(visited('google.com/jobs')); // false
+console.log(visited('facebook.com/map')); // false
+console.log(visited('facebook.com/tpp')); // false 
