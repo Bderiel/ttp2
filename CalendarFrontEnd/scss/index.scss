@@ -1,0 +1,45 @@
+#app {
+    height: 88vh;
+}
+
+
+.flex{
+    display: flex;
+}
+.calendar{
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.date{
+    width: 14%;
+    border: 1px solid black;
+}
+
+.container{
+  width: 80%;
+  margin: auto;
+  height: 100%;
+}
+
+.dark{
+    background: #ddd;
+}
+
+.header{
+  height: 5%;
+  width: 97%;
+  background-image: linear-gradient(279deg, #497cc2, #0c2c4c);
+  color: white;
+  margin-bottom: 1%;
+  padding: 15px 15px;
+  text-align: center;
+  font-size: 2em;
+  div {
+      margin-right: 1%;
+  }
+}
+
+.fa-arrow-left{
+    margin-right: 3%;
+}
