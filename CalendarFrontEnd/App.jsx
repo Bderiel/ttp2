@@ -12,19 +12,24 @@ class App extends Component {
     };
     this.months = this.months.bind(this);
     this.daysInMonth = this.daysInMonth.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   componentDidMount() {
     // grab all events put on state
   }
   months() {
-    return {
-      1: 'January',
-      2: 'Feburary',
-      3: 'March',
-      4: 'April',
-      5: 'May',
-      6: 'June',
-    };
+    return ['January',
+      'Feburary',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'];
   }
 
   daysInMonth(month, year) {
@@ -34,32 +39,54 @@ class App extends Component {
       if (i <= days) {
         output.push({ day: i });
       } else {
-        output.push({ day: i % days, dark:true });
+        output.push({ day: i % days, dark: true });
       }
     }
     return output;
   }
-
+  handleClick(action) {
+    let { currentMonth, currentYear } = this.state;
+    if (action === 'right') {
+      if (currentMonth === 11) {
+        this.setState({
+          currentMonth: 0,
+        });
+      } else {
+        this.setState({
+          currentMonth: currentMonth += 1,
+        });
+      }
+    } else if (currentMonth === 0) {
+      this.setState({
+        currentMonth: 11,
+      });
+    } else {
+      this.setState({
+        currentMonth: currentMonth -= 1,
+      });
+    }
+  }
   render() {
     const month = this.months();
     const { currentMonth, currentYear } = this.state;
+    console.log(currentMonth, 'currentMonth');
     const days = this.daysInMonth(currentMonth, currentYear);
     return (
       <div className="container">
-       
+
         <div className="header">
           <div>{month[currentMonth]}<span> {currentYear}  </span>
-            <i class="fa fa-arrow-left"></i>
-            <i class="fa fa-arrow-right"></i>
+            <i onClick={() => (this.handleClick('left'))} className="fa fa-arrow-left" />
+            <i onClick={() => (this.handleClick('right'))} className="fa fa-arrow-right" />
           </div>
         </div>
-       
-        
+
+
         <div className="flex calendar">
           {days.map((day, idx) => {
             console.log(1);
             return (
-              <Day dark={day.dark} currentDay={day.day} key={days[idx]} />
+              <Day dark={day.dark} currentDay={day.day} key={days[idx].day} />
             );
           })}
         </div>
