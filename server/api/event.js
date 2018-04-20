@@ -16,10 +16,12 @@ Adds a new event
 */
 
 router.post('/', (req, res, next) => {
-  // const board = req.body.board;
+  const { time, event,date } = req.body;
+
   const newEvent = new Event({
-    date: Date.now(),
-    event: 'Test',
+    date,
+    event,
+    time,
   });
 
 
