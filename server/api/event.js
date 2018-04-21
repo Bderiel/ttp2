@@ -16,12 +16,13 @@ Adds a new event
 */
 
 router.post('/', (req, res, next) => {
-  const { time, event, date } = req.body;
+  const { start, end, event, date } = req.body;
 
   const newEvent = new Event({
     date,
     event,
-    time,
+    start,
+    end,
   });
   newEvent.save()
     .then((savedEvent) => {

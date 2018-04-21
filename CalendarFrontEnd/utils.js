@@ -13,12 +13,15 @@ export function eventHasher(events) {
       hash[year][month] = {};
     }
     if (!hash[year][month][day]) {
-      hash[year][month][day] = [{ event: events[i].event, _id: events[i]._id, time: events[i].time }];
+      hash[year][month][day] = [{
+        event: events[i].event, _id: events[i]._id, start: events[i].start, end: events[i].end,
+      }];
     } else {
       hash[year][month][day].push({
         event: events[i].event,
         _id: events[i]._id,
-        time: events[i].time,
+        start: events[i].start,
+        end: events[i].end,
       });
     }
   }
@@ -45,7 +48,7 @@ export function createCalendar(month, year) {
   const days = new Date(year, month + 1, 0).getDate();
   const FirstDay = new Date(year, month, 1).getDay();
   const output = []; // fill array to account for day that month starts with
-  console.log(days,'days')
+  console.log(days, 'days');
   for (let i = 0; i < FirstDay; i++) output.push({ day: '', dark: true, _id: shortid.generate() });
 
   for (let i = 1; i <= 35 - FirstDay; i++) {
@@ -76,6 +79,10 @@ export function timeConverter(time) {
   }
 
   timeValue += (minutes < 10) ? `:0${minutes}` : `:${minutes}`; // get minutes
-  timeValue += (hours >= 12) ? ' P.M' : ' A.M'; // get AM/PM
+  timeValue += (hours >= 12) ? ' pm' : ' am'; // get AM/PM
   return timeValue;
+}
+
+export function eventTruncate(detail) {
+  return detail.length > 10 ? `${detail.slice(0, 7)}...` : detail;
 }

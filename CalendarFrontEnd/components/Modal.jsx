@@ -49,18 +49,19 @@ class ModalStyled extends Component {
         </div>
         <div className="event-content">
           {events.map((eventObj) => {
-            const { event, time, _id } = eventObj;
+            const { event, start, _id, end } = eventObj;
             return (
               <div className="event" key={_id}>
                 <div className="event-container">
-                  <p>{`${timeConverter(time)}: ${event}`}</p>
+                  <p className="event-detail">{event}</p>
+                  <p className="event-time">{`${timeConverter(start)}-${timeConverter(end)}`}</p>
                 </div>
-                <button className="event-delete" onClick={() => { this.handleDelete(_id); }} >Delete</button>
+                <button className="event-delete" onClick={() => { this.handleDelete(_id); }} ><img className="event-trash" src="https://use.fontawesome.com/releases/v5.0.10/svgs/regular/trash-alt.svg" alt="delete" /></button>
               </div>
             );
           })}
+          <Form selectedDate={selectedDate} onFormSubmit={onFormSubmit} onRequestClose={onRequestClose} />
         </div>
-        <Form selectedDate={selectedDate} onFormSubmit={onFormSubmit} onRequestClose={onRequestClose} />
       </Modal>
     );
   }

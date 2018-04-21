@@ -1,6 +1,9 @@
 @import 'events';
 @import 'fade';
 
+$color-grey: #ddd;
+
+
 #app {
     height: 88vh;
 }
@@ -19,6 +22,7 @@
     overflow: hidden;
     height: 137px;
     border: 1px solid black;
+    cursor: pointer;
 }
 
 .container{
@@ -28,7 +32,7 @@
 }
 
 .dark{
-    background: #ddd;
+    background:$color-grey;
 }
 
 .header{
@@ -42,5 +46,12 @@
   display: flex;
   div {
       margin-right: 1%;
+  }
+}
+
+.date-preview{
+    margin-top: 5%;
+  p{
+  margin: 0;
   }
 }

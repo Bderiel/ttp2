@@ -6,7 +6,8 @@ class AddEventFrom extends Component {
     super();
     this.state = {
       event: '',
-      time: '',
+      end: '',
+      start: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,14 +32,17 @@ class AddEventFrom extends Component {
   }
 
   render() {
-    const { time, event } = this.state;
+    const { time, event, start, end } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <label>Event
         <input onChange={this.handleChange} type="text" name="event" value={event} required />
         </label>
-        <label>Time
-          <input onChange={this.handleChange} type="time" name="time" value={time} required />
+        <label>Start
+          <input onChange={this.handleChange} type="time" name="start" value={start} required />
+        </label>
+        <label>End
+          <input onChange={this.handleChange} type="time" name="end" value={end} required />
         </label>
         <button type="submit">Submit</button>
       </form>

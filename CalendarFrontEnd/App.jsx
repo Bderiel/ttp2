@@ -8,7 +8,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      events: [],
       currentMonth: 3,
       currentYear: 2018,
       calendar: [],
@@ -72,7 +71,7 @@ class App extends Component {
       });
     }
   }
-
+  
   openModal(selectedDate) {
     this.setState({ modalIsOpen: true, selectedDate });
   }
