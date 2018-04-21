@@ -1,4 +1,5 @@
 import React from 'react';
+import { timeConverter } from '../utils';
 
 const Day = (props) => {
   const { currentDay, dark, events, openModal, selectedDate } = props;
@@ -8,11 +9,12 @@ const Day = (props) => {
       <div className="date dark">{currentDay}
       </div> :
       <div className="date">{currentDay}
-        <button onClick={() => (openModal(selectedDate))}>Add</button>
-        {truncate.map((event) => {
+        <button onClick={() => (openModal(selectedDate))}>View</button>
+        {truncate.map((eventObj) => {
+          const { event, time, _id } = eventObj;
           return (
-            <div className="flex">
-              <p>{'12:00: ' + event.event.slice(0, 15)}</p>
+            <div key={_id}>
+              <p>{`${timeConverter(time)}:  ` + event.slice(0, 15)}</p>
             </div>
           );
         })}

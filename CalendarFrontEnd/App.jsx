@@ -1,63 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import shortid from 'shortid';
 import { Day, Modal } from './components';
-
-function eventHasher(events) {
-  const hash = {};
-  for (let i = 0; i < events.length; i++) {
-    const day = new Date(events[i].date).getDate();
-    const month = new Date(events[i].date).getMonth();
-    const year = new Date(events[i].date).getFullYear();
-    if (!hash[year]) {
-      hash[year] = {};
-    }
-    if (!hash[year][month]) {
-      hash[year][month] = {};
-    }
-    if (!hash[year][month][day]) {
-      hash[year][month][day] = [{ event: events[i].event, _id: events[i]._id }];
-    } else {
-      hash[year][month][day].push({
-        event: events[i].event,
-        _id: events[i]._id,
-      });
-    }
-  }
-  return hash;
-}
-
-function months() { // make utils
-  return ['January',
-    'Feburary',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'];
-}
-
-function createCalendar(month, year) {
-  const days = new Date(year, month, 0).getDate();
-  const FirstDay = new Date(year, month, 1).getDay();
-  const output = []; // fill array to account for day that month starts with
-
-  for (let i = 0; i < FirstDay; i++) output.push({ day: '', dark: true, _id: shortid.generate() });
-
-  for (let i = 1; i <= 35 - FirstDay; i++) {
-    if (i <= days) {
-      output.push({ day: i, _id: shortid.generate(), date: new Date(year, month, i) });
-    } else {
-      output.push({ day: '', dark: true, _id: shortid.generate() });
-    }
-  }
-  return output;
-}
+import { eventHasher, months, createCalendar } from './utils';
 
 class App extends Component {
   constructor() {
@@ -67,10 +11,11 @@ class App extends Component {
       currentMonth: 3,
       currentYear: 2018,
       calendar: [],
-      events: null,
+      events: {},
       modalIsOpen: false,
-      selectedDate: null,
+      selectedDate: new Date(),
     };
+    this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -79,8 +24,14 @@ class App extends Component {
   componentDidMount() {
     // grab all events put on state
     const { currentMonth, currentYear } = this.state;
-    const calendar = createCalendar(currentMonth, currentYear);
-    this.setState({ calendar });
+    this.state.calendar = createCalendar(currentMonth, currentYear);;
+    axios.get('/api/event')
+      .then((res) => {
+        const events = res.data;
+        this.setState({ events: eventHasher(events) });
+      });
+  }
+  onFormSubmit() {
     axios.get('/api/event')
       .then((res) => {
         const events = res.data;
@@ -120,8 +71,8 @@ class App extends Component {
       });
     }
   }
+
   openModal(selectedDate) {
-    console.log(selectedDate);
     this.setState({ modalIsOpen: true, selectedDate });
   }
 
@@ -137,11 +88,11 @@ class App extends Component {
   render() {
     const monthObj = months();
     const {
-      currentMonth, currentYear, calendar, events, modalIsOpen, selectedDate
+      currentMonth, currentYear, calendar, events, modalIsOpen, selectedDate,
     } = this.state;
     return (
       <div className="container">
-        <Modal modalIsOpen={modalIsOpen} onRequestClose={this.closeModal} onAfterOpen={this.afterOpenModal} selectedDate={selectedDate} />
+        <Modal onFormSubmit={this.onFormSubmit} events={events[currentYear] && events[currentYear][currentMonth] && events[currentYear][currentMonth][selectedDate.getDate()] ? events[currentYear][currentMonth][selectedDate.getDate()] : []} modalIsOpen={modalIsOpen} onRequestClose={this.closeModal} onAfterOpen={this.afterOpenModal} selectedDate={selectedDate} onFormSubmit={this.onFormSubmit} />
         <div className="header">
           <i onClick={() => (this.handleClick('left'))} className="fa fa-arrow-left" />
           <div>{monthObj[currentMonth]}<span> {currentYear}  </span>
@@ -149,7 +100,7 @@ class App extends Component {
           </div>
         </div>
         <div className="flex calendar">
-          {events && calendar.length && calendar.map((day) => {
+          {calendar.length && calendar.map((day) => {
             const date = day.date ? day.date.getDate() : null;
             const month = day.date ? day.date.getMonth() : null;
             const year = day.date ? day.date.getFullYear() : null;

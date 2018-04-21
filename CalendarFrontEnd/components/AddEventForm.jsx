@@ -15,22 +15,27 @@ class AddEventFrom extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    const { onRequestClose, onFormSubmit } = this.props;
     const formData = this.state;
     formData.date = this.props.selectedDate;
-    axios.post('/api/event', formData);
+    axios.post('/api/event', formData)
+      .then(res => res)
+      .then(() => {
+        onFormSubmit();
+        onRequestClose();
+      });
   }
 
   render() {
-    console.log(this.state);
     return (
       <form onSubmit={this.handleSubmit}>
         <label>Event
-        <input onChange={this.handleChange} type="text" name="event" />
+        <input onChange={this.handleChange} type="text" name="event" required />
         </label>
         <label>Time
-          <input onChange={this.handleChange} type="text" name="time" />
+          <input onChange={this.handleChange} type="time" name="time" required />
         </label>
-        <button type="submit" />
+        <button type="submit">Submit</button>
       </form>
     );
   }
