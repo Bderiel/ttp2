@@ -26,19 +26,20 @@ export function eventHasher(events) {
 }
 
 export function months() { // make utils
-  return ['January',
-    'Feburary',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'];
+  return [{ color: '#B0BEC5', mon: 'January' },
+    { color: '#EF5350', mon: 'Feburary' },
+    { color: '#673AB7', mon: 'March' },
+    { color: '#64B5F6', mon: 'April' },
+    { color: '#01579B', mon: 'May' },
+    { color: '#66BB6A', mon: 'June' },
+    { color: '#AED581', mon: 'July' },
+    { color: '#AFB42B', mon: 'August' },
+    { color: '#FFC107', mon: 'September' },
+    { color: '#E65100', mon: 'October' },
+    { color: '#1976D2', mon: 'November' },
+    { color: 'goldenrod', mon: 'December' }];
 }
+
 
 export function createCalendar(month, year) {
   const days = new Date(year, month, 0).getDate();

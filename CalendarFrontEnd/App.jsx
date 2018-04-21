@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Day, Modal } from './components';
 import { eventHasher, months, createCalendar } from './utils';
 
+
 class App extends Component {
   constructor() {
     super();
@@ -90,12 +91,14 @@ class App extends Component {
     const {
       currentMonth, currentYear, calendar, events, modalIsOpen, selectedDate,
     } = this.state;
+    const monthColor = { backgroundColor: monthObj[currentMonth].color };
+    const monthWord = monthObj[currentMonth].mon;
     return (
       <div className="container">
-        <Modal onFormSubmit={this.onFormSubmit} events={events[currentYear] && events[currentYear][currentMonth] && events[currentYear][currentMonth][selectedDate.getDate()] ? events[currentYear][currentMonth][selectedDate.getDate()] : []} modalIsOpen={modalIsOpen} onRequestClose={this.closeModal} onAfterOpen={this.afterOpenModal} selectedDate={selectedDate} onFormSubmit={this.onFormSubmit} />
-        <div className="header">
+        <Modal currentMonth={monthWord} monthColor={monthColor} onFormSubmit={this.onFormSubmit} events={events[currentYear] && events[currentYear][currentMonth] && events[currentYear][currentMonth][selectedDate.getDate()] ? events[currentYear][currentMonth][selectedDate.getDate()] : []} modalIsOpen={modalIsOpen} onRequestClose={this.closeModal} onAfterOpen={this.afterOpenModal} selectedDate={selectedDate} onFormSubmit={this.onFormSubmit} />
+        <div className="header" style={monthColor}> 
           <i onClick={() => (this.handleClick('left'))} className="fa fa-arrow-left" />
-          <div>{monthObj[currentMonth]}<span> {currentYear}  </span>
+          <div>{monthWord}<span> {currentYear}  </span>
             <i onClick={() => (this.handleClick('right'))} className="fa fa-arrow-right" />
           </div>
         </div>
@@ -105,7 +108,7 @@ class App extends Component {
             const month = day.date ? day.date.getMonth() : null;
             const year = day.date ? day.date.getFullYear() : null;
             return (
-              <Day openModal={this.openModal} events={events[year] && events[year][month] && events[year][month][date] ? events[year][month][date] : []} dark={day.dark} selectedDate={day.date} key={day._id} />
+              <Day openModal={this.openModal} events={events[year] && events[year][month] && events[year][month][date] ? events[year][month][date] : []} dark={day.dark} selectedDate={day.date} day={day.day} key={day._id} />
             );
           })}
         </div>

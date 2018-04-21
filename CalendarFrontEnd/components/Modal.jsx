@@ -13,6 +13,8 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     height: '50%',
+    width: '50%',
+    padding: '0px',
   },
 };
 Modal.setAppElement('#app');
@@ -33,7 +35,7 @@ class ModalStyled extends Component {
 
   render() {
     const {
-      modalIsOpen, afterOpenModal, onRequestClose, selectedDate, onFormSubmit, events,
+      modalIsOpen, afterOpenModal, onRequestClose, selectedDate, onFormSubmit, events, monthColor, currentMonth
     } = this.props;
     return (
       <Modal
@@ -41,22 +43,27 @@ class ModalStyled extends Component {
         onAfterOpen={afterOpenModal}
         style={customStyles}
       >
-        <button onClick={onRequestClose}>close</button>
-        <div>
+        <div style={monthColor} className="modal-header">
+          <p>{currentMonth} {selectedDate.getDate()}</p>
+          <button onClick={onRequestClose} className="modal-close">X</button>
+        </div>
+        <div className="event-content">
           {events.map((eventObj) => {
             const { event, time, _id } = eventObj;
             return (
-              <div key={_id}>
-                <p>{`${timeConverter(time)}: ${event.slice(0, 15)}`}<button onClick={() => { this.handleDelete(_id); }} >Delete</button></p>
+              <div className="event" key={_id}>
+                <div className="event-container">
+                  <p>{`${timeConverter(time)}: ${event}`}</p>
+                </div>
+                <button className="event-delete" onClick={() => { this.handleDelete(_id); }} >Delete</button>
               </div>
             );
           })}
-          <Form selectedDate={selectedDate} onFormSubmit={onFormSubmit} onRequestClose={onRequestClose} />
         </div>
+        <Form selectedDate={selectedDate} onFormSubmit={onFormSubmit} onRequestClose={onRequestClose} />
       </Modal>
     );
   }
 }
 
 export default ModalStyled;
-
