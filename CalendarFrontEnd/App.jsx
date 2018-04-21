@@ -25,7 +25,7 @@ class App extends Component {
   componentDidMount() {
     // grab all events put on state
     const { currentMonth, currentYear } = this.state;
-    this.state.calendar = createCalendar(currentMonth, currentYear);;
+    this.state.calendar = createCalendar(currentMonth, currentYear);
     axios.get('/api/event')
       .then((res) => {
         const events = res.data;
@@ -96,7 +96,7 @@ class App extends Component {
     return (
       <div className="container">
         <Modal currentMonth={monthWord} monthColor={monthColor} onFormSubmit={this.onFormSubmit} events={events[currentYear] && events[currentYear][currentMonth] && events[currentYear][currentMonth][selectedDate.getDate()] ? events[currentYear][currentMonth][selectedDate.getDate()] : []} modalIsOpen={modalIsOpen} onRequestClose={this.closeModal} onAfterOpen={this.afterOpenModal} selectedDate={selectedDate} onFormSubmit={this.onFormSubmit} />
-        <div className="header" style={monthColor}> 
+        <div className="header" style={monthColor}>
           <i onClick={() => (this.handleClick('left'))} className="fa fa-arrow-left" />
           <div>{monthWord}<span> {currentYear}  </span>
             <i onClick={() => (this.handleClick('right'))} className="fa fa-arrow-right" />

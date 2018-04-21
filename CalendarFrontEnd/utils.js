@@ -42,10 +42,10 @@ export function months() { // make utils
 
 
 export function createCalendar(month, year) {
-  const days = new Date(year, month, 0).getDate();
+  const days = new Date(year, month + 1, 0).getDate();
   const FirstDay = new Date(year, month, 1).getDay();
   const output = []; // fill array to account for day that month starts with
-
+  console.log(days,'days')
   for (let i = 0; i < FirstDay; i++) output.push({ day: '', dark: true, _id: shortid.generate() });
 
   for (let i = 1; i <= 35 - FirstDay; i++) {

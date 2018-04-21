@@ -1,0 +1,24 @@
+
+@-webkit-keyframes fade {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes fade {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes fade {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes fade {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.fade {
+  -webkit-animation: fade 3s; /* Safari 4+ */
+  -moz-animation:    fade 3s; /* Fx 5+ */
+  -o-animation:      fade 3s; /* Opera 12+ */
+  animation:         fade 3s; /* IE 10+, Fx 29+ */
+}
