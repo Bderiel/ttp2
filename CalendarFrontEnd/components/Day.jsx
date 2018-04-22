@@ -13,7 +13,7 @@ const Day = (props) => {
           const { event, start, _id } = eventObj;
           return (
             <div className="date-preview" key={_id}>
-              <p>{`${timeConverter(start)}:  ` + eventTruncate(event)}</p>
+              <p><span className="date-preview-time">{timeConverter(start)}: </span>{ eventTruncate(event)}</p>
             </div>
           );
         })}

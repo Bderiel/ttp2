@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Day, Modal } from './components';
 import { eventHasher, months, createCalendar } from './utils';
 
+const daysEngl = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 class App extends Component {
   constructor() {
@@ -71,7 +72,7 @@ class App extends Component {
       });
     }
   }
-  
+
   openModal(selectedDate) {
     this.setState({ modalIsOpen: true, selectedDate });
   }
@@ -97,9 +98,14 @@ class App extends Component {
         <Modal currentMonth={monthWord} monthColor={monthColor} onFormSubmit={this.onFormSubmit} events={events[currentYear] && events[currentYear][currentMonth] && events[currentYear][currentMonth][selectedDate.getDate()] ? events[currentYear][currentMonth][selectedDate.getDate()] : []} modalIsOpen={modalIsOpen} onRequestClose={this.closeModal} onAfterOpen={this.afterOpenModal} selectedDate={selectedDate} onFormSubmit={this.onFormSubmit} />
         <div className="header" style={monthColor}>
           <i onClick={() => (this.handleClick('left'))} className="fa fa-arrow-left" />
+          <i onClick={() => (this.handleClick('right'))} className="fa fa-arrow-right" />
           <div>{monthWord}<span> {currentYear}  </span>
-            <i onClick={() => (this.handleClick('right'))} className="fa fa-arrow-right" />
           </div>
+        </div>
+        <div className="days-of-week flex">
+          {daysEngl.map(day => (
+            <div>{day}</div>
+          ))}
         </div>
         <div className="flex calendar">
           {calendar.length && calendar.map((day) => {

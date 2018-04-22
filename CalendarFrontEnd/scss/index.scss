@@ -1,11 +1,12 @@
 @import 'events';
 @import 'fade';
+@import 'form';
 
 $color-grey: #ddd;
 
 
 #app {
-    height: 88vh;
+    height: 68vh;
 }
 
 
@@ -20,7 +21,7 @@ $color-grey: #ddd;
 .date{
     width: 14%;
     overflow: hidden;
-    height: 137px;
+    height: 132px;
     border: 1px solid black;
     cursor: pointer;
 }
@@ -47,11 +48,25 @@ $color-grey: #ddd;
   div {
       margin-right: 1%;
   }
+  i{
+      margin-left: 8px;
+      cursor: pointer;
+  }
 }
 
 .date-preview{
     margin-top: 5%;
   p{
   margin: 0;
+  }
+}
+.date-preview-time{
+  color: $color-grey;
+}
+
+.days-of-week {
+    font-size: 1.5em;
+  div{
+    width: 100%;
   }
 }
