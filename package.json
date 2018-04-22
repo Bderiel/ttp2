@@ -7,8 +7,8 @@
     "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index",
-    "start-dev": "npm run build-client-watch & nodemon server/index",
+    "start": "node CalendarBackEnd/server/index",
+    "start-dev": "npm run build-client-watch & nodemon CalendarBackEnd/server/index",
     "deploy": "sh scripts/deploy"
   },
   "author": "",
