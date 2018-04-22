@@ -2,7 +2,7 @@ module.exports = {
   entry: './CalendarFrontEnd/index.jsx',
   output: {
     path: __dirname,
-    filename: '.CalendarFrontEnd/public/bundle.js',
+    filename: 'CalendarFrontEnd/public/bundle.js',
   },
   devtool: 'source-map',
   resolve: {
