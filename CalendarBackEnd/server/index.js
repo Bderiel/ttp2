@@ -25,7 +25,7 @@ passport.deserializeUser((id, done) => {
 });
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, '../../public')));
+app.use(express.static(path.join(__dirname, '../../CalendarFrontEnd/public')));
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'Trabajo',

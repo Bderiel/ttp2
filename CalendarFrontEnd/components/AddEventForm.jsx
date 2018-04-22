@@ -35,7 +35,7 @@ class AddEventFrom extends Component {
     const { time, event, start, end } = this.state;
     return (
       <form id="add-event"className="container" onSubmit={this.handleSubmit}>
-        <label>Event:
+        <label>Add Event:
         <input onChange={this.handleChange} type="text" name="event" value={event} required />
         </label>
         <label>Start:

@@ -1,5 +1,5 @@
 {
-  "name": "pinterest-clone",
+  "name": "ttp-calendar",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -21,7 +21,6 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
-    "history": "^4.7.2",
     "mongoose": "^4.13.7",
     "mongoose-unique-validator": "^1.0.6",
     "morgan": "^1.9.0",
@@ -35,10 +34,6 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2",
-    "redux-devtools-extension": "^2.13.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
     "shortid": "^2.2.8"
   },
   "devDependencies": {
