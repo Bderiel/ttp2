@@ -16,7 +16,9 @@ Adds a new event
 */
 
 router.post('/', (req, res, next) => {
-  const { start, end, event, date } = req.body;
+  const {
+    start, end, event, date,
+  } = req.body;
 
   const newEvent = new Event({
     date,
@@ -42,6 +44,25 @@ router.delete('/:id', (req, res, next) => {
     .catch(next);
 });
 
+/*
+Updates an event
+*/
+
+router.put('/:id', (req, res, next) => {
+  const { id } = req.params;
+  const {
+    start, end, event, date,
+  } = req.body;
+
+  Event.update({ _id: id }, {
+    date,
+    event,
+    start,
+    end,
+  })
+    .then(deleted => res.json(deleted))
+    .catch(next);
+});
+
 
 module.exports = router;
-
